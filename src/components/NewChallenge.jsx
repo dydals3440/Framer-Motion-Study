@@ -57,17 +57,19 @@ export default function NewChallenge({ onDone }) {
           <input ref={deadline} type='date' name='deadline' id='deadline' />
         </p>
 
-        <ul id='new-challenge-images'>
+        {/* 부모의 요소를 위에다 감쌈 */}
+        <motion.ul
+          id='new-challenge-images'
+          variants={{
+            visible: { transition: { staggerChildren: 0.05 } },
+          }}
+        >
           {images.map((image) => (
             <motion.li
               variants={{
                 hidden: { opacity: 0, scale: 0.5 },
                 visible: { opacity: 1, scale: 1 },
               }}
-              // backdrop이 늦게 닫히는 현상
-              // exit할떄 활성화되는 variants를 visible로 덮어씌워서 오버라이드.
-              // 모달에 해당하는 부모의 컴포넌트는 여전히 hidden이고, 자식 컴포넌트 중첩된 리스트 exit상태는 visible.
-              // 여기서 exit: variants의 이름을 쓸 수 없다. 그에 해당하는 값을 써야한다. 나중에는 수정될 수 있지만, 배리언트 기능을 사용하려면 꼭 해결하고 넘어가야 한다. 애니메이션을 자동으로 활성화하면서 동시에 모달을 닫을 떄 발생하는 지연을 방지하기 위해서 이렇다.
               exit={{ opacity: 1, scale: 1 }}
               transition={{ type: 'spring' }}
               key={image.alt}
@@ -77,7 +79,7 @@ export default function NewChallenge({ onDone }) {
               <img {...image} />
             </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
         <p className='new-challenge-actions'>
           <button type='button' onClick={onDone}>
