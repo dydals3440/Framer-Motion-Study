@@ -318,21 +318,10 @@ main {
   max-width: 90%;
   z-index: 10;
   /* forwards는 지속시간이 끝나 애니메이션이 종료되었을 떄 최종 상태를 유지하라는 뜻. */
-  animation: slide-up-fade-in 0.3s ease-out forwards;
+  /* animation: slide-up-fade-in 0.3s ease-out forwards; */
 }
 
-@keyframes slide-up-fade-in {
-  /* from{}
-to{} */
-  0% {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+/*  */
 
 .modal h2 {
   margin-top: 0;
