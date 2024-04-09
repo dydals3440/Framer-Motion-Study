@@ -3,12 +3,16 @@ import { useContext, useRef, useState } from 'react';
 import { ChallengesContext } from '../store/challenges-context.jsx';
 import Modal from './Modal.jsx';
 import images from '../assets/images.js';
-import { motion } from 'framer-motion';
+import { motion, useAnimate, stagger } from 'framer-motion';
 
 export default function NewChallenge({ onDone }) {
   const title = useRef();
   const description = useRef();
   const deadline = useRef();
+
+  // 첫번째 요소는 ref가 될 것이다. 요소에 추가할 수 있음.
+  // 두번쨰 요소는 함수가 될 것이다. 특정 애니메이션을 명령적으로 트리거하기 위해 코드에 사용가능.
+  const [scope, animate] = useAnimate();
 
   const [selectedImage, setSelectedImage] = useState(null);
   const { addChallenge } = useContext(ChallengesContext);
@@ -32,6 +36,12 @@ export default function NewChallenge({ onDone }) {
       !challenge.deadline.trim() ||
       !challenge.image
     ) {
+      // input과 textarea 태그에 적용
+      animate(
+        'input, textarea',
+        { x: [-10, 0, 10, 0] },
+        { type: 'spring', duration: 0.2, delay: stagger(0.05) }
+      );
       return;
     }
 
@@ -41,7 +51,7 @@ export default function NewChallenge({ onDone }) {
 
   return (
     <Modal title='New Challenge' onClose={onDone}>
-      <form id='new-challenge' onSubmit={handleSubmit}>
+      <form id='new-challenge' onSubmit={handleSubmit} ref={scope}>
         <p>
           <label htmlFor='title'>Title</label>
           <input ref={title} type='text' name='title' id='title' />

@@ -28,7 +28,9 @@ export default function ChallengeItem({
   }
 
   return (
-    <li>
+    // layout 속성을 적용하면 framer-motion이 알아서, 레이아웃 변화에 자동으로 애니메이션을 적용해 준다.
+    // y: -30 =>위로 30px
+    <motion.li layout exit={{ y: -30, opacity: 0 }}>
       <article className='challenge-item'>
         <header>
           <img {...challenge.image} />
@@ -67,6 +69,6 @@ export default function ChallengeItem({
           )}
         </div>
       </article>
-    </li>
+    </motion.li>
   );
 }
