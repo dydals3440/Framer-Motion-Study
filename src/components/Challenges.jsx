@@ -52,6 +52,8 @@ export default function Challenges() {
               // key를 넣어서 아래의 p태그와 별개라는걸 알려줘야 exit효과가 정상동작.
               key='list'
               exit={{ y: -30, opacity: 0 }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
               className='challenge-items'
             >
               <AnimatePresence>
