@@ -9,7 +9,8 @@ function Tab({ isSelected, onSelect, badgeCaption, children }) {
         onClick={onSelect}
       >
         {children}
-        <Badge caption={badgeCaption}></Badge>
+        {/* framer안쓰면 키는 다른 용도로 사용됨, 어떤 요소에 키를 추가하고 키에 할당된 값을 변경하면 예컨데 상태변화로 인해서 말이다. 리액트는 이전 컴포넌트 인스턴스를 없애고 새것을 랜더링한다. 따라서 원하는 컴포넌트에 key 속성을 추가하고, 값을 변경하면 리액트가 해당 컴포넌트를 다시 생성해 준다. 이로써 해당 컴포넌트에 저장된 내부상태는 재설정, 따라서 플레이되어야하는 뱃지의 진입 애니메이션이 다시 시작되게함. */}
+        <Badge key={badgeCaption} caption={badgeCaption}></Badge>
       </button>
       {isSelected && (
         // layoutId를 주어서, 같은 돔요소가, 스타일링만 변경되는 경우에 알아서 부드러운 효과를 준다.
